@@ -1,4 +1,3 @@
-
 @baseURL = http://localhost:8080
 
 ### Get all products
@@ -11,4 +10,15 @@ Content-Type: application/json
 {
     "name": "Apple",
     "price": 0.99
+}
+
+### Create a sale
+POST {{baseURL}}/sales
+Content-Type: application/json
+
+{
+  "lineItems": [
+    { "productId": 1, "quantity": 2 },
+    { "productId": 2, "quantity": 1 }
+  ]
 }

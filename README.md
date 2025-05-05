@@ -5,6 +5,7 @@ This is a simple REST API server built with [Gin](https://github.com/gin-gonic/g
 ## Features
 - List products (`GET /products`)
 - Create a product (`POST /products`)
+- Create a sale (`POST /sales`)
 
 ## Prerequisites
 - [Go 1.23+](https://golang.org/dl/)
@@ -33,6 +34,7 @@ This is a simple REST API server built with [Gin](https://github.com/gin-gonic/g
 
 - `GET /products` - Returns a list of products in JSON format
 - `POST /products` - Creates a new product. Accepts JSON body:
+- `POST /sales` - Creates a new sale. Accepts JSON body:
 
 
 ## API Testing with request.http
@@ -46,3 +48,4 @@ To use:
 ## Database
 - Uses SQLite (`products.db` file will be created automatically)
 - Seeds with sample products if the database is empty
+- Stores products, sales, and line items

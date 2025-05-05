@@ -43,5 +43,20 @@ func main() {
 		c.JSON(http.StatusCreated, product)
 	})
 
+	r.POST("/sales", func(c *gin.Context) {
+		var req SaleRequest
+		if err := c.ShouldBindJSON(&req); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		sale, err := CreateSale(req)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, sale)
+	})
+
 	r.Run()
 }

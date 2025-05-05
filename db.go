@@ -12,7 +12,7 @@ func setupDatabase() *gorm.DB {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	db.AutoMigrate(&Product{})
+	db.AutoMigrate(&Product{}, &Sale{}, &LineItem{})
 	return db
 }
 

@@ -5,3 +5,27 @@ type Product struct {
 	Name  string  `json:"name" binding:"required"`
 	Price float64 `json:"price" binding:"required,gt=0"`
 }
+
+type Sale struct {
+	ID        int        `json:"id" gorm:"primaryKey"`
+	LineItems []LineItem `json:"lineItems" gorm:"foreignKey:SaleID"`
+	Total     float64    `json:"total"`
+}
+
+type LineItem struct {
+	ID        int     `json:"id" gorm:"primaryKey"`
+	SaleID    int     `json:"-"`
+	ProductID int     `json:"productId"`
+	Quantity  int     `json:"quantity"`
+	Price     float64 `json:"price"`
+	Total     float64 `json:"total"`
+}
+
+type SaleLineItem struct {
+	ProductID int `json:"productId"`
+	Quantity  int `json:"quantity"`
+}
+
+type SaleRequest struct {
+	LineItems []SaleLineItem `json:"lineItems"`
+}
