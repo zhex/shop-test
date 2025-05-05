@@ -21,9 +21,9 @@ func seedDatabase(db *gorm.DB) {
 	db.Model(&Product{}).Count(&count)
 	if count == 0 {
 		products := []Product{
-			{Name: "Apple", Price: 0.99},
-			{Name: "Banana", Price: 0.59},
-			{Name: "Orange", Price: 1.29},
+			{ID: 1, Name: "Chrome Toaster", Price: 100},
+			{ID: 2, Name: "Copper Kettle", Price: 49.99},
+			{ID: 3, Name: "Mixing Bowl", Price: 20},
 		}
 		db.Create(&products)
 	}

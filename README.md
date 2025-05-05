@@ -4,6 +4,7 @@ This is a simple REST API server built with [Gin](https://github.com/gin-gonic/g
 
 ## Features
 - List products (`GET /products`)
+- Create a product (`POST /products`)
 
 ## Prerequisites
 - [Go 1.23+](https://golang.org/dl/)
@@ -27,9 +28,20 @@ This is a simple REST API server built with [Gin](https://github.com/gin-gonic/g
    ```
    The server will start on `http://localhost:8080` by default.
 
+
 ## API Endpoints
 
 - `GET /products` - Returns a list of products in JSON format
+- `POST /products` - Creates a new product. Accepts JSON body:
+
+
+## API Testing with request.http
+
+You can use the `request.http` file (compatible with VS Code REST Client or JetBrains HTTP Client) to quickly test the API endpoints.
+
+To use:
+1. Open `request.http` in your editor.
+2. Click the "Send Request" button above each request (or use your editor's HTTP client features).
 
 ## Database
 - Uses SQLite (`products.db` file will be created automatically)

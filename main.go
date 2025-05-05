@@ -30,5 +30,18 @@ func main() {
 		}
 		c.JSON(http.StatusOK, products)
 	})
+
+	r.POST("/products", func(c *gin.Context) {
+		var product Product
+		if err := c.ShouldBindJSON(&product); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := CreateProduct(&product); err != nil {
+			panic(err)
+		}
+		c.JSON(http.StatusCreated, product)
+	})
+
 	r.Run()
 }

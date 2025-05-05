@@ -1,0 +1,14 @@
+
+@baseURL = http://localhost:8080
+
+### Get all products
+GET {{baseURL}}/products
+
+### Create a product
+POST {{baseURL}}/products
+Content-Type: application/json
+
+{
+    "name": "Apple",
+    "price": 0.99
+}
