@@ -10,6 +10,7 @@ type Sale struct {
 	ID        int        `json:"id" gorm:"primaryKey"`
 	LineItems []LineItem `json:"lineItems" gorm:"foreignKey:SaleID"`
 	Total     float64    `json:"total"`
+	Discount  float64    `json:"discount"`
 }
 
 type LineItem struct {
@@ -19,6 +20,7 @@ type LineItem struct {
 	Quantity  int     `json:"quantity"`
 	Price     float64 `json:"price"`
 	Total     float64 `json:"total"`
+	Discount  float64 `json:"discount"`
 }
 
 type SaleLineItem struct {
@@ -28,4 +30,5 @@ type SaleLineItem struct {
 
 type SaleRequest struct {
 	LineItems []SaleLineItem `json:"lineItems"`
+	Discount  float64        `json:"discount"`
 }

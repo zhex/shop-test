@@ -14,7 +14,7 @@ This is a simple REST API server built with [Gin](https://github.com/gin-gonic/g
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/zhex/shop-test
    cd shop-test
    ```
 

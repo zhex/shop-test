@@ -64,18 +64,40 @@ func CreateSale(req SaleRequest) (*Sale, error) {
 				Price:     product.Price,
 				Total:     lineTotal,
 			}
-			if err := tx.Create(&lineItem).Error; err != nil {
-				return err
-			}
 			lineItems = append(lineItems, lineItem)
 			total += lineTotal
 		}
+
+		discount := req.Discount
+		if discount > total {
+			// Cap discount to total
+			discount = total
+		}
+		var distributed float64
+		for i := range lineItems {
+			if i == len(lineItems)-1 {
+				// Last item gets the remainder to avoid floating point issues
+				lineItems[i].Discount = discount - distributed
+			} else {
+				prop := lineItems[i].Total / total
+				lineItems[i].Discount = roundToTwo(prop * discount)
+				distributed += lineItems[i].Discount
+			}
+			lineItems[i].Total = lineItems[i].Total - lineItems[i].Discount
+		}
+
 		sale.LineItems = lineItems
-		sale.Total = total
+		sale.Total = total - discount
+		sale.Discount = discount
+
 		return tx.Create(&sale).Error
 	})
 	if err != nil {
 		return nil, err
 	}
 	return &sale, nil
+}
+
+func roundToTwo(val float64) float64 {
+	return float64(int(val*100+0.5)) / 100
 }

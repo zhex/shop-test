@@ -1,9 +1,11 @@
 package main
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 func errorHandlingMiddleware() gin.HandlerFunc {
@@ -52,10 +54,14 @@ func main() {
 
 		sale, err := CreateSale(req)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				c.JSON(http.StatusBadRequest, gin.H{"error": "one or more products not found"})
+				return
+			}
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
 			return
 		}
-		c.JSON(http.StatusOK, sale)
+		c.JSON(http.StatusCreated, sale)
 	})
 
 	r.Run()

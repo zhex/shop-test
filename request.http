@@ -20,5 +20,6 @@ Content-Type: application/json
   "lineItems": [
     { "productId": 1, "quantity": 2 },
     { "productId": 2, "quantity": 1 }
-  ]
+  ],
+  "discount": 10
 }
